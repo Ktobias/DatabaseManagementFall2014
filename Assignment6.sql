@@ -54,3 +54,8 @@ order by c.name ASC;
 --7. Write a query to check the accuracy of the dollars column in the Orders table. This means calculating Orders.dollars from 
 --data in other tables and comparing those values to the values in Orders.dollars. Return all rows in Orders where Orders.dollars
 --is incorrect, if any.
+select * 
+from orders o, customers c, products p
+where o.cid = c.cid
+and o.pid = p.pid 
+and o.dollars != (o.qty * p.priceusd) * (1 - discount/100);
