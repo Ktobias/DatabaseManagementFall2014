@@ -16,7 +16,7 @@ limit 2;
 select name, city
 from customers c
 where city in (select city
-	       from (select city, sum(quantity)
+	       from (select city, sum(qty)
 	             from products
 	             group by city
 		      )
@@ -37,7 +37,7 @@ order by o.dollars ASC;
 
 --5. Show all customer names (in order) and their total ordered, and nothing more. Use coalesce to avoid showing NULLs.
 select c.name, (coalesce (sum(o.qty), 0))
-from orders o RIGHT OUTER JOIN customers c
+from orders o right outer join customers c
 on o.cid = c.cid
 group by c.name;
 
